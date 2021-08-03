@@ -1,0 +1,47 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+<html lang="en">
+
+{% block title_block %}
+    Add a Category
+{% endblock %}
+
+{% block body_block%}
+
+    <!--add background-->
+    <div id="Layer1" style="position:absolute; width:100%; height:100%; background-color: snow; z-index:-1" >
+            <img src="{% static 'images/background_4.jpg' %}" height="100%" width="100%" alt=""/>
+    </div>
+
+    <h1>Add a Category</h1>
+    <!--
+    <div class="col-md-offset-4">
+        <form id="category_form1" method="post" action="{% url 'rango:add_category' %}">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Create Category" />
+        </form>
+    </div>
+    -->
+
+    <form id="category_form" method="post" action="{% url 'rango:add_category' %}">
+      {% csrf_token %}
+      <div class="form-row align-items-center">
+        <div class="col-md-6">
+          <input type="text" class="form-control col-md-12" id="inlineFormInput" name="category_name" placeholder="Please enter the category name ">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+      </div>
+    </form>
+
+{% endblock %}
+</html>

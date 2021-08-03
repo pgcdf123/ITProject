@@ -1,0 +1,56 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Register
+{% endblock %}
+
+
+
+
+
+{% block body_block %}
+
+    <div id="Layer1" style="position:absolute; width:100%; height:100%; background-color: snow; z-index:-1" >
+        <img src="{% static 'images/background_1.jpg' %}" height="100%" width="100%" alt=""/>
+    </div>
+{% if registered %}
+Rango says: <strong>thank you for registering!</strong>
+<a href="{% url 'rango:index' %}">Return to the homepage.</a><br />
+
+{% else %}
+
+    <!--
+    <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <input type="submit" name="submit" value="Register" />
+    </form>
+    -->
+<div class="container">
+    <div class="form-group col-md-5">
+        <h1><strong>Register here!</strong><br /></h1>
+    </div>
+    <form id="user_form" method="post" action="{% url 'rango:register' %}">
+        {% csrf_token %}
+        <div class="form-group col-md-5">
+            <label for="myusername">username:</label>
+            <input type="text" class="form-control" name="username" placeholder="please enter username"/>
+            <label >Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</label>
+        </div>
+        <div class="form-group col-md-5">
+            <label for="myemail">email:</label>
+            <input type="email" class="form-control" name="email" placeholder="please enter email"/>
+        </div>
+        <div class="form-group col-md-5">
+            <label for="mypwd">password:</label>
+            <input type="password" class="form-control" name="password" placeholder="please enter password"/>
+        </div>
+        <div class="form-group col-md-5">
+            <button type="submit" class="btn btn-primary">register</button>
+        </div>
+    </form>
+</div>
+{% endif %}
+{% endblock %}

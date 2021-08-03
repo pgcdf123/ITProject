@@ -1,0 +1,41 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        Unknown Category
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+    {% if category %}
+    <h1>{{ category.name }}</h1>
+    {% if pages %}
+    <!--
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+    -->
+    {% for page in pages %}
+        <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">{{page.title}}</h5>
+                <a href="{{ page.url }}" class="btn btn-primary">Go</a>
+              </div>
+        </div>
+    {% endfor %}
+    {% else %}
+    <strong>No pages currently in category.</strong>
+    {% endif %}<br/>
+    {% if user.is_authenticated %}
+    <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug%}'" class="btn btn-primary offset-sm-0">Add Page</button>
+    {% endif %}
+    {% else %}
+    The specified category does not exist
+    {% endif %}
+
+{% endblock %}

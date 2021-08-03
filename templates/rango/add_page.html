@@ -1,0 +1,48 @@
+{% extends 'rango/base.html' %}
+{%  load static %}
+{% block title_block %}
+    Add a Page
+{% endblock %}
+
+{% block body_block %}
+
+    <!--add background-->
+    <div id="Layer1" style="position:absolute; width:100%; height:100%; background-color: snow; z-index:-1" >
+            <img src="{% static 'images/background_3.jpg' %}" height="100%" width="100%" alt=""/>
+    </div>
+
+
+    <h1>Add A Page to {{ category.name }}</h1>
+    <!--
+    <div>
+        <form id="add_page_form" method="post" action="/rango/category/{{ category.slug }}/add_page/">
+            {% csrf_token %}
+            {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}
+            {% endfor %}
+            <input type="submit" name="submit" value="Add Page"/>
+        </form>
+    </div> -->
+
+    <form id="add_page_form" method="post" action="/rango/category/{{ category.slug }}/add_page/">
+        {% csrf_token %}
+      <div class="form-row align-items-center">
+        <div class="col-3">
+            <label class="sr-only" for="inlineFormInput">Name</label>
+            <input type="text" class="form-control mb-2" name="title" id="inlineFormInput" placeholder="Please enter the title of the page">
+        </div>
+          <div class="col-3">
+              <label class="sr-only" for="inlineFormInput">Name</label>
+              <input type="text" class="form-control mb-2" name="url" id="inlineFormInput" placeholder="Please enter the URL of the page">
+          </div>
+        <div class="col-auto">
+          <button type="submit" class="btn btn-primary mb-2">Submit</button>
+        </div>
+      </div>
+    </form>
+{% endblock %}

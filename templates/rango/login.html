@@ -1,0 +1,46 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    Login
+{% endblock %}
+
+{% block body_block%}
+
+    <!--add background-->
+    <div id="Layer1" style="position:absolute; width:100%; height:100%; background-color: snow; z-index:-1" >
+            <img src="{% static 'images/background_2.jpg' %}" height="100%" width="100%" alt=""/>
+    </div>
+
+
+<!--
+<h1 class="text-center">Login to Rango</h1>
+<form id="login_form" method="post" action="{% url 'rango:login' %}" class="text-center">
+    {% csrf_token %}
+    Username:<input type="text" name="username" value="" size="50" /><br>
+    Password: <input type="password" name="password" value="" size="50" /><br>
+    <input type="submit" value="submit" />
+</form>
+-->
+
+
+<form action="{% url 'rango:login' %}" method="post" class="form-horizontal" role="form">
+    {% csrf_token %}
+    <h1>Login to Rango</h1>
+    <div class="form-group col-md-6">
+        <label for="uname" class="control-label col-md-5">username</label>
+        <div class="col-md-6 col-md-offset-4">
+            <input type="text" id="uname" name="username" class="form-control" placeholder="please enter username">
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <label for="password" class="control-label col-md-5">password</label>
+        <div class="col-md-6">
+            <input type="password" id="password" name="password" class="form-control" placeholder="please enter password">
+        </div>
+    </div>
+    <div class="form-group col-md-6">
+        <button type="submit" class="btn btn-primary" >Login</button>
+    </div>
+</form>
+{% endblock %}
