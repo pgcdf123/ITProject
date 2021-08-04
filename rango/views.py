@@ -44,11 +44,11 @@ def show_category(request, category_name_slug):
         pages = Page.objects.filter(category=category)
         current_page = request.GET.get('p', 1)
         current_page = int(current_page)
-        start = (current_page - 1) * 2
-        end = current_page * 2
+        start = (current_page - 1) * 5
+        end = current_page * 5
         context_dict['category'] = category
         context_dict['pages'] = pages[start:end]
-        page_count,page_mode= divmod(len(pages),2)
+        page_count,page_mode= divmod(len(pages),5)
         page_list=[]
         if page_mode:
             page_count+=1
