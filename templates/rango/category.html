@@ -13,13 +13,6 @@
     {% if category %}
     <h1>{{ category.name }}</h1>
     {% if pages %}
-    <!--
-        <ul>
-            {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
-            {% endfor %}
-        </ul>
-    -->
     {% for page in pages %}
         <div class="card">
               <div class="card-body">
@@ -28,6 +21,9 @@
               </div>
         </div>
     {% endfor %}
+        <div class="pagenation">
+        {{ page_str }}
+        </div>
     {% else %}
     <strong>No pages currently in category.</strong>
     {% endif %}<br/>

@@ -13,7 +13,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from datetime import datetime
-
+from django.utils.safestring import mark_safe
 
 def index(request):
     # - means descending order, remove - is ascending order
@@ -39,19 +39,34 @@ def about(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
-
     try:
         category = Category.objects.get(slug=category_name_slug)
         pages = Page.objects.filter(category=category)
-        context_dict['pages'] = pages
+        current_page = request.GET.get('p', 1)
+        current_page = int(current_page)
+        start = (current_page - 1) * 2
+        end = current_page * 2
         context_dict['category'] = category
-        print(context_dict)
+        context_dict['pages'] = pages[start:end]
+        page_count,page_mode= divmod(len(pages),2)
+        page_list=[]
+        if page_mode:
+            page_count+=1
+        for i in range(1, page_count+1):
+            if i == current_page:
+                temp = '<a class="page active" href="/rango/category/%s/?p=%s">%s</a>' % (category_name_slug, i, i)
+            else:
+                temp = '<a class="page" href="/rango/category/%s/?p=%s">%s</a>' % (category_name_slug, i, i)
+            page_list.append(temp)
+        page_str="".join(page_list)
+        page_str=mark_safe(page_str)
+        context_dict['page_str']=page_str
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
+        context_dict['data'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
-
 
 @login_required
 def add_category(request):
