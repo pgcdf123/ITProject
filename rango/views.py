@@ -278,15 +278,13 @@ class PageClass:
                 next = '<a class ="page " href="/rango/category/%s/?p=%s">next page</a>' % (
                     self.categoryname, self.current_page + 1,)
         page_list.append(next)
-        '''
-        jump = """<input type='text'/><a onclick='jumpTo(this,"/rango/category/");'>Go</a>
+        jump = """<input type='text'/><a onclick='jumpTo(this,"/rango/category/%s/?p=");'>Go</a>
                      <script>
                         function jumpTo(ths,base){
                            var val=ths.previousSibling.value;
-                           location.href=base+'<category.slug>'+'/?p='+val;}
-                     </script>"""
+                           location.href=base+val;}
+                     </script>"""%(self.categoryname,)
         page_list.append(jump)
-        '''
         page_str="".join(page_list)
         page_str=mark_safe(page_str)
         return page_str
