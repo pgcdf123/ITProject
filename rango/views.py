@@ -82,7 +82,6 @@ def add_category(request):
     print("返回添加页面")
     return render(request, 'rango/add_category.html')
 
-
 @login_required
 def add_page(request, category_name_slug):
     try:
@@ -124,32 +123,6 @@ def add_page(request, category_name_slug):
 
 
 def register(request):
-    """
-    registered = False
-    if request.method == 'POST':
-        user_form = UserForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            user.set_password(user.password)
-            user.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            if 'picture' in request.FILES:
-                profile.picture = request.FILES['picture']
-            profile.save()
-            registered = True
-        else:
-            print(user_form.errors, profile_form.errors)
-    else:
-        user_form = UserForm()
-        profile_form = UserProfileForm()
-    return render(request, 'rango/register.html', context={'user_form': user_form,
-                                                           'profile_form': profile_form,
-                                                           'registered': registered})
-    """
-
     registered = False
     if request.method == 'POST':
         print(request.POST['username'])
@@ -157,7 +130,6 @@ def register(request):
         print(request.POST['password'])
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
-
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
             user.set_password(user.password)
@@ -170,8 +142,8 @@ def register(request):
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
-    return render(request, 'rango/register.html', locals())
 
+    return render(request, 'rango/register.html', locals())
 
 def user_login(request):
         if request.method == 'POST':
@@ -190,9 +162,9 @@ def user_login(request):
                     return HttpResponse("Your Rango account is disabled")
             else:
                 print(f'Invalid login details: {username}, {password}')
-                # return HttpResponse("Invalid login details supplied")
+
                 return JsonResponse({'flag': False})
-                # return redirect(reverse('rango:login', kwargs={'flag': status}))
+
         else:
             return render(request, 'rango/login.html')
 
@@ -227,7 +199,14 @@ def visitor_cookie_handler(request):
 
 
 def show_profile(request):
-    return render(request, 'rango/profile.html')
+    context_dic={}
+    user=getattr(request,'user',None)
+    username=user.username
+    userProfile=UserProfile.objects.get(user=user)
+    time=userProfile.date
+    context_dic={'username':username,'time':time}
+    return render(request, 'rango/profile.html',context=context_dic)
+
 class PageClass:
     def __init__(self,current_page,data_count,categoryname,page_count=5,page_limit=5):
         self.current_page=current_page
@@ -322,3 +301,6 @@ def pre_check_username(request):
         return JsonResponse({'flag': True})
     else:
         return JsonResponse({'flag': False})
+
+
+

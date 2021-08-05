@@ -1,6 +1,4 @@
 
-
-
 function checkUsername(){
     var username = document.getElementById("username").value;
     var reg_username = /^\w{6,14}$/;
@@ -34,9 +32,7 @@ $(function(){
         }
     });
     return false;
-
 })
-
 function preCheck(){
    var username = document.getElementById("username").value;
    $.ajax({

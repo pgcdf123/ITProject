@@ -36,7 +36,7 @@ Rango says: <strong>thank you for registering!</strong>
     <div class="form-group col-md-5">
         <h1><strong>Register here!</strong><br /></h1>
     </div>
-    <form id="user_form" method="post" action="{% url 'rango:register' %}">
+    <form id="user_form" method="post" action="{% url 'rango:register' %}" enctype=“multipart/form-data”>
         {% csrf_token %}
         <div class="form-group col-md-5">
             <label for="myusername">username:</label>
@@ -53,6 +53,7 @@ Rango says: <strong>thank you for registering!</strong>
             <input type="password" id="password" class="form-control" name="password" placeholder="please enter password"/>
             <span id="s_password" class="error"></span>
         </div>
+        {{ profile_form.as_p }}
         <div class="form-group col-md-5">
             <button type="submit" class="btn btn-primary">register</button>
         </div>

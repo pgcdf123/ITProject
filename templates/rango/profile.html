@@ -1,18 +1,87 @@
 {% extends 'rango/base.html' %}
 {% load static %}
-<html lang="en">
 
 {% block title_block %}
     Profile
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css'%}">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:500">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Josefin+Sans:600,700italic">
+    <link href='https://fonts.googleapis.com/css?family=Dosis:400,200,300,500,600,800,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:400,300,300italic,400italic">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500italic,500,700italic,700,900,900italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/theme/green.css'%}">
+
 {% endblock %}
 
 {% block body_block%}
-        <br>
-        <!-- <img class="img-circle" src="{% static 'images/banner_3.jpg' %}" alt="头像"/>-->
-        <div>
-            <img src="{% static 'images/rango.jpg' %}" class="rounded float-start" alt="user profile pic">
+    <section class="row featured-post-carousel">
+    <div class="item post">
+       <img src="{{ MEDIA_URL }}1.jpg"  class="img-responsive main-bg"/>
+        <div class="post-content">
+            <div class="container">
+                <h5 class="post-meta"><i>in</i><a href="#">{{ username }} Profile</a>|<a href="#">{{time}}</a></h5>
+                <h2 class="wordColor">{{ username }}</h2>
+            </div>
         </div>
-        
+    </div>
+    </section>
+    <section class="row content-wrap">
+      <div class="container">
+        <div class="row" id="post-masonry">
+              <!--Author Widget-->
+            <aside class="col-sm-4 widget-author widget widget-with-posts post">
+                <div class="widget-author-inner row">
+                    <div class="author-avatar row"><a href="#"><img src="images/author.png" alt="这里是头像" class="img-circle"></a></div>
+                    <a href="#"><h2 class="author-name">用户名</h2></a>
+                    <h5 class="author-title">用户签名</h5>
+                    <p> 用户介绍</p>
+                    <a href="#" class="know-more">用户网址</a>
+                </div>
+                <ul class="nav social-nav">
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-facebook-official"></i></a></li>
+                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fa fa-envelope"></i></a></li>
+                </ul>
+            </aside>
+            <!--Blog Post-->
+            <article class="col-sm-4 post post-masonry post-format-image">
+                <div class="post-wrapper row">
+                    <div class="featured-content row">
+                        <a href="single.html"><img src="{{ MEDIA_URL }}这里是page的图片“ alt=”Picture of a cat" class="img-responsive"></a>
+                    </div>
+                    <div class="post-excerpt row">
+                        <h5 class="post-meta">
+                            <a href="#" class="date">这里是page创建的时间</a>
+                            <span class="post-author"><i>by</i><a href="#">这里是作者名</a></span>
+                        </h5>
+                        <h3 class="post-title"><a href="single.html">这里是page名字</a></h3>
+                        <p>这里是page介绍</p>
+                        <footer class="row">
+                            <h5 class="taxonomy"><i>in</i> <a href="#">这里是category</a></h5>
+                            <div class="response-count"><img src="" alt="这里是点赞图标">5</div>
+                        </footer>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+    <script src="{% static 'js/jquery-2.2.0.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'vendors/owl-carousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'vendors/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'vendors/instafeed/instafeed.min.js' %}"></script>
+    <script src="{% static 'vendors/imagesLoaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendors/isotope/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/theme.js' %}"></script>
 {% endblock %}
 
 
