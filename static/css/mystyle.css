@@ -1,0 +1,22 @@
+.container{
+	padding-bottom:50px;
+}
+.footer {
+	height: 50px;
+
+	width: 100%;
+	
+	text-align:center;
+	
+	line-height:50px;
+
+	background-color: #ddd;
+
+	position: fixed;
+
+	bottom: 0px;
+	
+	font-size:12px;
+	
+	z-index:-1;
+}

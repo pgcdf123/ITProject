@@ -35,7 +35,9 @@
     <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug%}'" class="btn btn-primary offset-sm-0">Add Page</button>
     {% endif %}
     {% else %}
-    The specified category does not exist
+        <p class="text-danger">The specified category does not exist</p>
+
+        <button type="button" onclick="window.location.href='{% url 'rango:add_category'%}'" class="btn btn-primary offset-sm-0">Add a Category</button>
     {% endif %}
 
 {% endblock %}
