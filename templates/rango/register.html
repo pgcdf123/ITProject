@@ -1,6 +1,10 @@
 {% extends 'rango/base.html' %}
 {% load static %}
 
+{% block scripts %}
+    <script src="{% static 'js/register.js' %}"></script>
+{% endblock %}
+
 {% block title_block %}
     Register
 {% endblock %}
@@ -36,16 +40,18 @@ Rango says: <strong>thank you for registering!</strong>
         {% csrf_token %}
         <div class="form-group col-md-5">
             <label for="myusername">username:</label>
-            <input type="text" class="form-control" name="username" placeholder="please enter username"/>
-            <label >Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</label>
+            <input type="text" id="username" class="form-control" name="username" placeholder="please enter username"/>
+            <span id="s_username" class="error"></span>
         </div>
         <div class="form-group col-md-5">
             <label for="myemail">email:</label>
-            <input type="email" class="form-control" name="email" placeholder="please enter email"/>
+            <input type="email" id="email" class="form-control" name="email" placeholder="please enter email"/>
+            <span id="s_email" class="error"></span>
         </div>
         <div class="form-group col-md-5">
             <label for="mypwd">password:</label>
-            <input type="password" class="form-control" name="password" placeholder="please enter password"/>
+            <input type="password" id="password" class="form-control" name="password" placeholder="please enter password"/>
+            <span id="s_password" class="error"></span>
         </div>
         <div class="form-group col-md-5">
             <button type="submit" class="btn btn-primary">register</button>
@@ -54,3 +60,4 @@ Rango says: <strong>thank you for registering!</strong>
 </div>
 {% endif %}
 {% endblock %}
+

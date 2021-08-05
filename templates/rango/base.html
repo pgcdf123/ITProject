@@ -6,6 +6,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    {% block scripts %}
+    {% endblock %}
     <title>
             Rango -
             {% block title_block %}
@@ -169,8 +173,9 @@
 
             {% endif %}
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Please enter a category" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" method="post" action="{% url 'rango:search' %}">
+            {% csrf_token %}
+          <input class="form-control mr-sm-2" type="search" name="category" placeholder="Please enter a category" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>

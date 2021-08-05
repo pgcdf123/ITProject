@@ -14,6 +14,7 @@ urlpatterns = [
     path('restricted/', views.restricted, name='restricted'),
     path('logout/', views.user_logout, name='logout'),
     path('profile/', views.show_profile, name='profile'),
-
+    path('search/', views.search, name="search"),
+    path('pre_check_username/', views.pre_check_username, name="pre_check_username"),
 ]
 

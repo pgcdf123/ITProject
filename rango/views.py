@@ -1,8 +1,8 @@
 import uuid
 
 from django.shortcuts import render
-from django.http import HttpResponse
-from rango.models import Category
+from django.http import HttpResponse, JsonResponse
+from rango.models import Category, UserProfile
 from rango.models import Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from datetime import datetime
 from django.utils.safestring import mark_safe
+
 
 def index(request):
     # - means descending order, remove - is ascending order
@@ -173,23 +174,27 @@ def register(request):
 
 
 def user_login(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        print('username:', username)
-        print('password:', password)
-        user = authenticate(username=username, password=password)
-        if user:
-            if user.is_active:
-                login(request, user)
-                return redirect(reverse('rango:index'))
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            print('username:', username)
+            print('password:', password)
+            user = authenticate(username=username, password=password)
+            status = False
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect(reverse('rango:index'))
+                    # return HttpResponse(json.dumps({'flag': True}))
+                else:
+                    return HttpResponse("Your Rango account is disabled")
             else:
-                return HttpResponse("Your Rango account is disabled")
+                print(f'Invalid login details: {username}, {password}')
+                # return HttpResponse("Invalid login details supplied")
+                return JsonResponse({'flag': False})
+                # return redirect(reverse('rango:login', kwargs={'flag': status}))
         else:
-            print(f'Invalid login details: {username}, {password}')
-            return HttpResponse("Invalid login details supplied")
-    else:
-        return render(request, 'rango/login.html')
+            return render(request, 'rango/login.html')
 
 
 @login_required
@@ -288,3 +293,32 @@ class PageClass:
         page_str="".join(page_list)
         page_str=mark_safe(page_str)
         return page_str
+
+
+def search(request):
+    if request.method == "GET":
+        render(request, 'rango/category.html')
+
+    context_dict = {}
+    category_name_slug = request.POST['category']
+    print(category_name_slug)
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        pages = Page.objects.filter(category=category)
+        context_dict['pages'] = pages
+        context_dict['category'] = category
+        print(context_dict)
+    except Category.DoesNotExist:
+        context_dict['pages'] = None
+        context_dict['category'] = None
+
+    return render(request, 'rango/category.html', context=context_dict)
+
+
+def pre_check_username(request):
+    username = request.POST.get('username')
+    user_list = UserProfile.objects.filter(sname=username)
+    if user_list:
+        return JsonResponse({'flag': True})
+    else:
+        return JsonResponse({'flag': False})

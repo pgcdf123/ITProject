@@ -6,7 +6,9 @@
 {% endblock %}
 
 {% block body_block%}
-
+    <style>.hidde{
+        display: none;
+    }</style>
     <!--add background-->
     <div id="Layer1" style="position:absolute; width:100%; height:100%; background-color: snow; z-index:-1" >
             <img src="{% static 'images/background_2.jpg' %}" height="100%" width="100%" alt=""/>
@@ -24,7 +26,7 @@
 -->
 
 
-<form action="{% url 'rango:login' %}" method="post" class="form-horizontal" role="form">
+<form id="login_form" action="" method="post" class="form-horizontal" role="form">
     {% csrf_token %}
     <h1>Login to Rango</h1>
     <div class="form-group col-md-6">
@@ -36,11 +38,12 @@
     <div class="form-group col-md-6">
         <label for="password" class="control-label col-md-5">password</label>
         <div class="col-md-6">
-            <input type="password" id="password" name="password" class="form-control" placeholder="please enter password">
+            <input type="password" id="pwd" name="password" class="form-control" placeholder="please enter password">
         </div>
     </div>
+    <div id="errorMsg" class="error hidde">username or password is wrong</div>
     <div class="form-group col-md-6">
-        <button type="submit" class="btn btn-primary" >Login</button>
+        <button id="bt_sub" type="submit" class="btn btn-primary" >Login</button>
     </div>
 </form>
 {% endblock %}

@@ -11,8 +11,15 @@
 
 {% block body_block %}
     {% if category %}
-    <h1 id="categoryname">{{ category.name }}</h1>
+    <h1>{{ category.name }}</h1>
     {% if pages %}
+    <!--
+        <ul>
+            {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+            {% endfor %}
+        </ul>
+    -->
     {% for page in pages %}
         <div class="card">
               <div class="card-body">
@@ -21,9 +28,6 @@
               </div>
         </div>
     {% endfor %}
-        <div class="pagenation">
-        {{ page_str }}
-        </div>
     {% else %}
     <strong>No pages currently in category.</strong>
     {% endif %}<br/>
@@ -31,7 +35,9 @@
     <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug%}'" class="btn btn-primary offset-sm-0">Add Page</button>
     {% endif %}
     {% else %}
-    The specified category does not exist
+        <p class="text-danger">The specified category does not exist</p>
+
+        <button type="button" onclick="window.location.href='{% url 'rango:add_category'%}'" class="btn btn-primary offset-sm-0">Add a Category</button>
     {% endif %}
 
 {% endblock %}
