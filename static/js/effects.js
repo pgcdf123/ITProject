@@ -1,27 +1,5 @@
-(function ($){
-    function effect1()
-    {
-        var a_idx=0;
-     jQuery(document).ready(function($){
-      addTips = function(e){
-        var i=$("<span />").text(a[a_idx]);
-        a_idx=(a_idx+1)%a.length;
-        var x=e.pageX,y=e.pageY;
-        i.css({
-          "z-index": 99999999999999999999999999,
-          "top":y-20,
-          "left":x,
-          "position":"absolute",
-          "font-weight":"bold",
-          "color":"#ff6651"
-        });
-
-        $("body").append(i);
-        return false;
-      }
-      $("body").click(addTips);
-      $("body").bind("contextmenu",addTips)
-  });
+(function ($)
+{
       function o(w,v,i){
           return w.getAttribute(v)||i
       }
@@ -85,7 +63,6 @@
           d=2*a()-1;
           t.push({x:h,y:g,xa:q,ya:d,max:6000})
       }
-      setTimeout(function(){b()},100)
-    }
-     effect1()
+      setTimeout(function(){b()},300)
+
 })(jQuery)
