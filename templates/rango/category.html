@@ -11,37 +11,45 @@
 
 {% block body_block %}
     {% if category %}
-    <h1>{{ category.name }}</h1>
-    {% if pages %}
-    <!--
+        <h1>{{ category.name }}</h1>
+        {% if pages %}
+            <!--
         <ul>
             {% for page in pages %}
             <li><a href="{{ page.url }}">{{ page.title }}</a></li>
             {% endfor %}
         </ul>
     -->
-    {% for page in pages %}
-        <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">{{page.title}}</h5>
-                <a href="{{ page.url }}" class="btn btn-primary">Go</a>
-              </div>
-        </div>
-    {% endfor %}
-        <div class="pagenation">
-        {{ page_str }}
-        </div>
+            {% for page in pages %}
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ page.title }}</h5>
+                        <a href="{{ page.url }}" class="btn btn-primary">Go</a>
+                        <button id="zan" value="{{ page.title }}">
+                            <img src="{% static 'images/good.png' %}">
+                            <div id="{{ page.title }}">0</div>
+                        </button>
+                    </div>
+                </div>
+            {% endfor %}
+            <div class="pagenation">
+                {{ page_str }}
+            </div>
 
-    {% else %}
-    <strong>No pages currently in category.</strong>
-    {% endif %}<br/>
-    {% if user.is_authenticated %}
-    <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug%}'" class="btn btn-primary offset-sm-0">Add Page</button>
-    {% endif %}
+        {% else %}
+            <strong>No pages currently in category.</strong>
+        {% endif %}<br/>
+        {% if user.is_authenticated %}
+            <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug %}'"
+                    class="btn btn-primary offset-sm-0">Add Page
+            </button>
+        {% endif %}
     {% else %}
         <p class="text-danger">The specified category does not exist</p>
 
-        <button type="button" onclick="window.location.href='{% url 'rango:add_category'%}'" class="btn btn-primary offset-sm-0">Add a Category</button>
+        <button type="button" onclick="window.location.href='{% url 'rango:add_category' %}'"
+                class="btn btn-primary offset-sm-0">Add a Category
+        </button>
     {% endif %}
 
 {% endblock %}
