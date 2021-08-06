@@ -41,11 +41,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='profile_images/', blank=True)
-    date = models.CharField(max_length=128,blank=True)
-
+    date = models.CharField(max_length=128 , blank=True)
     def __str__(self):
         return self.user.username
 
-    def save(self):
-       super(UserProfile, self).save()
+    def save(self,*args, **kwargs):
        self.date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
+       super(UserProfile, self).save(*args, **kwargs)
+

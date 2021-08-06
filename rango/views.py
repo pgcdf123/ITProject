@@ -76,10 +76,10 @@ def add_category(request):
     print("进入函数")
     if request.method == 'POST':
         category_name = request.POST['category_name']
-        Category.objects.create(name=category_name, slug=uuid.uuid1)
-        Category.save()
+        category=Category.objects.create(name=category_name)
+        category.save()
         print("保存category")
-        return redirect('rango/')
+        return redirect(reverse('rango:index'))
     print("返回添加页面")
     return render(request, 'rango/add_category.html')
 
@@ -91,7 +91,7 @@ def add_page(request, category_name_slug):
         category = None
 
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:show_category'))
 
     """
     form = PageForm()
@@ -116,7 +116,8 @@ def add_page(request, category_name_slug):
         title = request.POST['title']
         print(title)
         url = request.POST['url']
-        Page.objects.create(title=title, url=url, category=category)
+        page=Page.objects.create(title=title, url=url, category=category)
+        page.save()
         return redirect(reverse('rango:show_category', kwargs={'category_name_slug':category_name_slug}))
 
     context_dict = {'category': category}
@@ -197,14 +198,18 @@ def visitor_cookie_handler(request):
         request.session['last_visit'] = last_visit_cookie
     request.session['visits'] = visits
 
+def test(request):
+    return render(request, 'rango/test.html')
 
 def show_profile(request):
-    context_dic={}
+
     user=getattr(request,"user",None)
     username=user.username
     userProfile=UserProfile.objects.get(user=user)
     time=userProfile.date
-    context_dic={'username':username,'time':time}
+    webiste=userProfile.website
+    context_dic={'username':username,'time':time,'webiste':webiste}
+
     return render(request, 'rango/profile.html',context=context_dic)
 
 class PageClass:

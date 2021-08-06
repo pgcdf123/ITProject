@@ -58,6 +58,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'tango_with_django_project.urls'
 
+USE_TZ = False
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

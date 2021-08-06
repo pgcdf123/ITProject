@@ -26,7 +26,7 @@
     /*==========================================================================================*/
     /*==============================Function Declaration==============================*/
     /*Featured Post Carousel*/
-   /*=== function featuredPostCarosel(){
+    function featuredPostCarosel(){
         if ( $('.featured-post-carousel').length ){
             $('.featured-post-carousel').owlCarousel({
                 items: 1,
@@ -37,7 +37,7 @@
                 navText: ['<i class="fa fa-angle-left"></i>','<i class="fa fa-angle-right"></i>']
             })
         }
-    }===*/
+    }
     
     /*Gallery Post*/    
     function galleryOfPost () {
@@ -193,7 +193,7 @@
     
     /*==========================================================================================*/
     /*Function Call*/
-    //featuredPostCarosel();
+    featuredPostCarosel();
     instafeedWidget();
     galleryOfPost ();
     galleryOfPost2 ();
