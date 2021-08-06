@@ -36,7 +36,7 @@ class Page(models.Model):
     def __str__(self):
         return self.title
 
-
+'''Userprofile model'''
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     website = models.URLField(blank=True)

@@ -126,7 +126,6 @@ def add_page(request, category_name_slug):
 def register(request):
     registered = False
     if request.method == 'POST':
-        a
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
@@ -208,24 +207,34 @@ def show_profile(request):
     context_dic={'username':username,'time':time,'webiste':webiste}
 
     return render(request, 'rango/profile.html',context=context_dic)
-
+"""It is a class to show Pages with many pages in a certain Category """
 class PageClass:
+    """init vars
+    data_count shows how many pages that a category has
+    categoryname is name of category
+    page_count is how many pages that can be shown in one page
+    page_limit is how many pages index can be shown in a website"""
     def __init__(self,current_page,data_count,categoryname,page_count=5,page_limit=5):
         self.current_page=current_page
         self.data_count=data_count
         self.page_count=page_count
         self.page_limit=page_limit
         self.categoryname=categoryname
+    """design a start index"""
     def start(self):
         return (self.current_page-1)*self.page_count
+
+    """design a end index"""
     def end(self):
         return self.current_page*self.page_count
+    """get total pages for a certain category"""
     @property
     def total_pages(self):
         v,mod=divmod(self.data_count,self.page_count)
         if mod:
             v+=1;
         return v
+    """Generate HTML dynamically"""
     def page_str(self):
         page_list=[]
         if self.total_pages<self.page_limit:
@@ -264,6 +273,7 @@ class PageClass:
                 next = '<a class ="page " href="/rango/category/%s/?p=%s">next page</a>' % (
                     self.categoryname, self.current_page + 1,)
         page_list.append(next)
+        """generate a javescript """
         jump = """<input type='text'/><a onclick='jumpTo(this,"/rango/category/%s/?p=");'>Go</a>
                      <script>
                         function jumpTo(ths,base){

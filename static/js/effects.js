@@ -1,3 +1,4 @@
+/**effect for mouse moving */
 (function ($)
 {
       function o(w,v,i){

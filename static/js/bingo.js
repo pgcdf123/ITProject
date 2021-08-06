@@ -1,6 +1,8 @@
+ /**use jquery to bind event in a for loop*/
   $('.card').delegate('#zan','click',function (){
     AddFavor(this)
   })
+ /**To achieve a like +1 every click*/
 function AddFavor(self)
   {
 

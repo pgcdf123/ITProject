@@ -1,3 +1,4 @@
+/**Is a resource from webiste*/
 (function ($) {
     "use strict";  
     
