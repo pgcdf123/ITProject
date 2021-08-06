@@ -27,6 +27,7 @@ def index(request):
     context_dict['pages'] = page_list
 
     visitor_cookie_handler(request)
+
     return render(request, 'rango/index.html', context=context_dict)
 
 
@@ -142,7 +143,6 @@ def register(request):
             registered = True
         else:
             print(user_form.errors, profile_form.errors)
-
     return render(request, 'rango/register.html', locals())
 
 def user_login(request):
@@ -200,7 +200,7 @@ def visitor_cookie_handler(request):
 
 def show_profile(request):
     context_dic={}
-    user=getattr(request,'user',None)
+    user=getattr(request,"user",None)
     username=user.username
     userProfile=UserProfile.objects.get(user=user)
     time=userProfile.date

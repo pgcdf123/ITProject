@@ -1,13 +1,14 @@
-$(function()
-{
-     var a_idx=0;
+(function ($){
+    function effect1()
+    {
+        var a_idx=0;
      jQuery(document).ready(function($){
       addTips = function(e){
         var i=$("<span />").text(a[a_idx]);
         a_idx=(a_idx+1)%a.length;
         var x=e.pageX,y=e.pageY;
         i.css({
-          "z-index": 999999999999999999,
+          "z-index": 99999999999999999999999999,
           "top":y-20,
           "left":x,
           "position":"absolute",
@@ -16,47 +17,11 @@ $(function()
         });
 
         $("body").append(i);
-        i.animate({"top": y-180,"opacity":0},1500,function(){i.remove()})
         return false;
       }
-      //绑定鼠标左键
       $("body").click(addTips);
-      //绑定鼠标左键
       $("body").bind("contextmenu",addTips)
   });
-     var u=document.createElement("canvas"),s=l(),c="c_n"+s.l,e=u.getContext("2d"),r,n,
-      m=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(i){
-          window.setTimeout(i,1000/45)
-      },
-      a=Math.random,f={x:null,y:null,max:20000};
-      u.className="particle_canvas";
-      var browserName = navigator.userAgent.toLowerCase();
-      if (/msie/i.test(browserName) && !/opera/.test(browserName)) {
-          u.className += ' ie10_gte';
-      };
-      u.id=c;
-      u.style.cssText="position:fixed;top:0;left:0;z-index:"+s.z+";opacity:"+s.o;
-      j("body")[0].appendChild(u);
-      k(),window.onresize=k;
-      window.onmousemove=function(i){
-          i=i||window.event,
-          f.x=i.clientX,
-          f.y=i.clientY
-      },
-      window.onmouseout=function(){
-          f.x=null,
-          f.y=null
-      };
-      for(var t=[],p=0;s.n>p;p++){
-          var h=a()*r,
-          g=a()*n,
-          q=2*a()-1,
-          d=2*a()-1;
-          t.push({x:h,y:g,xa:q,ya:d,max:6000})
-      }
-      setTimeout(function(){b()},100)
-})()
-
       function o(w,v,i){
           return w.getAttribute(v)||i
       }
@@ -91,3 +56,36 @@ $(function()
               w.splice(w.indexOf(i),1)
           }),m(b)
       }
+      var u=document.createElement("canvas"),s=l(),c="c_n"+s.l,e=u.getContext("2d"),r,n,m=window.requestAnimationFrame||window.webkitRequestAnimationFrame||window.mozRequestAnimationFrame||window.oRequestAnimationFrame||window.msRequestAnimationFrame||function(i){
+          window.setTimeout(i,1000/45)
+      },
+      a=Math.random,f={x:null,y:null,max:20000};
+      u.className="particle_canvas";
+      var browserName = navigator.userAgent.toLowerCase();
+      if (/msie/i.test(browserName) && !/opera/.test(browserName)) {
+          u.className += ' ie10_gte';
+      };
+      u.id=c;
+      u.style.cssText="position:fixed;top:0;left:0;z-index:"+s.z+";opacity:"+s.o;
+      j("body")[0].appendChild(u);
+      k(),window.onresize=k;
+      window.onmousemove=function(i){
+          i=i||window.event,
+          f.x=i.clientX,
+          f.y=i.clientY
+      },
+      window.onmouseout=function(){
+          f.x=null,
+          f.y=null
+      };
+      for(var t=[],p=0;s.n>p;p++){
+          var h=a()*r,
+          g=a()*n,
+          q=2*a()-1,
+          d=2*a()-1;
+          t.push({x:h,y:g,xa:q,ya:d,max:6000})
+      }
+      setTimeout(function(){b()},100)
+    }
+     effect1()
+})(jQuery)

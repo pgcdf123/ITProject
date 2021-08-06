@@ -47,7 +47,5 @@ class UserProfile(models.Model):
         return self.user.username
 
     def save(self):
-       print("执行了实践方法")
        super(UserProfile, self).save()
        self.date=time.strftime('%Y-%m-%d',time.localtime(time.time()))
-       print(self.date)

@@ -189,8 +189,7 @@
                 slideshow: false,
                 sync: "#carousel"
             })
-        }
-    }
+        }}
     
     /*==========================================================================================*/
     /*Function Call*/
@@ -201,7 +200,6 @@
     postMasonry();
     zoomGallery();
     postShare ();
-    thumbSilder()
-    
+    thumbSilder();
     
 })(jQuery)
