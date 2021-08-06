@@ -1821,6 +1821,7 @@ textarea.form-control {
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.05);
 }
 .widget-author .author-avatar {
+  display: table-cell;
   margin: -40px auto 0;
   width: 108px;
   height: 108px;
