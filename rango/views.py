@@ -19,7 +19,7 @@ from django.utils.safestring import mark_safe
 def index(request):
     # - means descending order, remove - is ascending order
     category_list = Category.objects.order_by('-likes')[:5]
-    page_list = Page.objects.order_by('-views')[0:5]
+    page_list = Page.objects.order_by('-views')[0:8]
 
     context_dict = {}
     context_dict['boldmessage'] = 'Crunchy, creamy, cookie, candy, cupcake!'
