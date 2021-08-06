@@ -46,7 +46,7 @@ def show_category(request, category_name_slug):
         pages = Page.objects.filter(category=category)
         current_page = request.GET.get('p', 1)
         current_page = int(current_page)
-        per_pagecount=5
+        per_pagecount=3
         page_limit=5
         page_obj=PageClass(current_page,len(pages),category_name_slug,per_pagecount,page_limit)
         context_dict['category'] = category
@@ -55,7 +55,7 @@ def show_category(request, category_name_slug):
     except Category.DoesNotExist:
         context_dict['pages'] = None
         context_dict['category'] = None
-        context_dict['data'] = None
+        context_dict['page_str'] = None
 
     return render(request, 'rango/category.html', context=context_dict)
 
@@ -73,14 +73,12 @@ def add_category(request):
             print(form.errors)
     return render(request, 'rango/add_category.html', {'form': form})
     """
-    print("进入函数")
     if request.method == 'POST':
         category_name = request.POST['category_name']
         category=Category.objects.create(name=category_name)
         category.save()
-        print("保存category")
         return redirect(reverse('rango:index'))
-    print("返回添加页面")
+
     return render(request, 'rango/add_category.html')
 
 @login_required
@@ -89,6 +87,7 @@ def add_page(request, category_name_slug):
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
         category = None
+        print("fffff")
 
     if category is None:
         return redirect(reverse('rango:show_category'))
@@ -127,9 +126,7 @@ def add_page(request, category_name_slug):
 def register(request):
     registered = False
     if request.method == 'POST':
-        print(request.POST['username'])
-        print(request.POST['email'])
-        print(request.POST['password'])
+        a
         user_form = UserForm(request.POST)
         profile_form = UserProfileForm(request.POST)
         if user_form.is_valid() and profile_form.is_valid():
@@ -227,7 +224,7 @@ class PageClass:
     def total_pages(self):
         v,mod=divmod(self.data_count,self.page_count)
         if mod:
-            v+1;
+            v+=1;
         return v
     def page_str(self):
         page_list=[]

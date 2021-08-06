@@ -41,7 +41,7 @@
             <strong>No pages currently in category.</strong>
         {% endif %}<br/>
         {% if user.is_authenticated %}
-            <button type="button" onclick="window.location.href='{% url 'rango:add_page' category.slug %}'"
+            <button type="button"  href="{% url 'rango:add_page' category.slug %}"
                     class="btn btn-primary offset-sm-0">Add Page
             </button>
         {% endif %}
